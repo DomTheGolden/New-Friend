@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#141512">
+  <meta name="description" content="Now hiring Player Two: a mock job listing for co-op gaming, quick wit, and fictional compensation.">
+  <title>Now Hiring: Player Two - After Hours</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --paper: #141512;
+      --ink: #f0eee4;
+      --muted: #aaa99d;
+      --red: #ff6947;
+      --blue: #c4de56;
+      --yellow: #e8b94e;
+      --green: #283329;
+      --line: rgba(240, 238, 228, .22);
+      --serif: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      --sans: Arial, Helvetica, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background-color: var(--paper);
+      background-image: radial-gradient(rgba(240, 238, 228, .1) .65px, transparent .65px);
+      background-size: 6px 6px;
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button, input { font: inherit; }
+    button { color: inherit; }
+    a { color: inherit; }
+    .site-shell { width: min(1160px, calc(100% - 48px)); margin: 0 auto; }
+
+    .masthead {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .brand { display: flex; align-items: center; gap: 11px; text-decoration: none; }
+    .brand-mark {
+      width: 31px;
+      height: 31px;
+      display: grid;
+      place-items: center;
+      border: 1.5px solid var(--ink);
+      border-radius: 2px;
+      background: var(--blue);
+      color: var(--paper);
+      font-family: var(--sans);
+      font-size: 1.05rem;
+      letter-spacing: 0;
+    }
+    .edition { color: var(--muted); font-weight: 600; letter-spacing: .08em; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.02fr .98fr;
+      gap: clamp(36px, 7vw, 92px);
+      align-items: center;
+      padding: clamp(48px, 8vw, 96px) 0 78px;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 23px;
+      color: var(--red);
+      font-size: .72rem;
+      font-weight: 900;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { content: ""; width: 25px; height: 2px; background: currentColor; }
+    h1 {
+      max-width: 650px;
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(3.7rem, 7vw, 6.4rem);
+      font-weight: 900;
+      letter-spacing: -.035em;
+      line-height: .9;
+      text-transform: uppercase;
+    }
+    h1 em { color: var(--blue); font-weight: 500; }
+    .intro {
+      max-width: 440px;
+      margin: 26px 0 27px;
+      color: #c4c3b8;
+      font-size: 1.05rem;
+      line-height: 1.7;
+    }
+    .intro strong { color: var(--ink); }
+    .primary-button {
+      min-height: 54px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 15px;
+      padding: 0 22px;
+      border: 1.5px solid var(--blue);
+      border-radius: 2px;
+      background: var(--blue);
+      color: var(--paper);
+      cursor: pointer;
+      font-size: .82rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      transition: background .18s ease, color .18s ease, transform .18s ease;
+    }
+    .primary-button:hover { transform: translateY(-2px); border-color: var(--red); background: var(--red); color: var(--paper); }
+    .primary-button:focus-visible, .close-button:focus-visible, input:focus-visible {
+      outline: 3px solid var(--yellow);
+      outline-offset: 3px;
+    }
+    .button-arrow { font-size: 1.2rem; line-height: 0; }
+    .fine-print { margin: 12px 0 0; color: var(--muted); font-size: .73rem; }
+    .job-facts { max-width: 510px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 25px 0 0; }
+    .job-facts div { padding: 10px 11px; border: 1px solid var(--line); background: rgba(255, 255, 255, .025); }
+    .job-facts dt { margin-bottom: 5px; color: var(--red); font-size: .58rem; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+    .job-facts dd { margin: 0; font-size: .72rem; font-weight: 800; line-height: 1.35; }
+
+    .poster {
+      position: relative;
+      min-height: 470px;
+      display: grid;
+      place-items: center;
+      overflow: visible;
+      border: 1.5px solid var(--ink);
+      background: var(--green);
+      box-shadow: 9px 9px 0 var(--red);
+      transform: rotate(-1deg);
+    }
+    .poster::before {
+      position: absolute;
+      inset: 14px;
+      border: 1px solid rgba(240, 238, 228, .26);
+      content: "";
+      pointer-events: none;
+    }
+    .poster-art { width: min(93%, 470px); height: auto; position: relative; z-index: 1; }
+    .poster-caption {
+      position: absolute;
+      z-index: 2;
+      right: 23px;
+      bottom: 21px;
+      padding: 8px 11px;
+      border: 1px solid var(--ink);
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: .7rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      transform: rotate(2deg);
+    }
+    .seal {
+      position: absolute;
+      z-index: 3;
+      top: -21px;
+      right: -23px;
+      width: 101px;
+      height: 101px;
+      display: grid;
+      place-items: center;
+      padding: 15px;
+      border: 1.5px solid var(--paper);
+      border-radius: 3px;
+      background: var(--red);
+      color: var(--paper);
+      font-size: .65rem;
+      font-weight: 900;
+      line-height: 1.25;
+      text-align: center;
+      text-transform: uppercase;
+      transform: rotate(5deg);
+    }
+
+    .ticker {
+      overflow: hidden;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: var(--blue);
+      color: var(--paper);
+    }
+    .ticker-track {
+      width: max-content;
+      display: flex;
+      gap: 25px;
+      padding: 13px 0;
+      font-size: .69rem;
+      font-weight: 900;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+    .ticker-track span::after { content: "  /  " ; margin-left: 25px; color: var(--red); }
+
+    .details { padding: 84px 0 93px; }
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 25px;
+      margin-bottom: 29px;
+    }
+    .section-heading p { margin: 0 0 8px; color: var(--red); font-size: .68rem; font-weight: 900; letter-spacing: .15em; text-transform: uppercase; }
+    h2 { margin: 0; font-family: var(--serif); font-size: clamp(2.25rem, 4vw, 3.5rem); font-weight: 900; letter-spacing: -.025em; text-transform: uppercase; }
+    .section-note { max-width: 230px; margin: 0 0 4px; color: var(--muted); font-size: .82rem; line-height: 1.6; }
+    .details-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 13px; }
+    .detail-card { min-height: 205px; padding: 23px 24px; border: 1px solid var(--line); background: #1c1d19; }
+    .detail-card:nth-child(2) { background: #20231a; }
+    .detail-card:nth-child(3) { background: #29201c; }
+    .card-number { display: block; margin-bottom: 31px; color: var(--red); font-family: var(--sans); font-size: .68rem; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+    .detail-card h3 { margin: 0 0 10px; font-family: var(--serif); font-size: 1.55rem; font-weight: 900; letter-spacing: -.01em; text-transform: uppercase; }
+    .detail-card p { margin: 0; color: #c4c3b8; font-size: .84rem; line-height: 1.65; }
+
+    .jokes { padding: 20px 0 88px; }
+    .jokes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; }
+    .joke-card { position: relative; min-height: 222px; padding: 22px; border: 1px solid var(--line); background: #1b1c18; }
+    .joke-card::after { position: absolute; top: 0; left: 22px; width: 42px; height: 3px; background: var(--red); content: ""; }
+    .joke-label { display: block; margin: 5px 0 27px; color: var(--blue); font-size: .63rem; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; }
+    .joke-card blockquote { margin: 0; font-family: var(--serif); font-size: clamp(1.25rem, 2vw, 1.65rem); font-weight: 700; line-height: 1.12; text-transform: uppercase; }
+    .joke-card blockquote span { color: var(--red); }
+
+    .gaming { display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: 36px; margin-bottom: 86px; padding: clamp(26px, 5vw, 52px); border: 1px solid var(--line); background: #1c1d19; }
+    .gaming-kicker { margin: 0 0 13px; color: var(--red); font-size: .68rem; font-weight: 900; letter-spacing: .15em; text-transform: uppercase; }
+    .gaming h2 { max-width: 540px; font-size: clamp(2.7rem, 5.2vw, 4.7rem); line-height: .92; }
+    .gaming-copy > p:not(.gaming-kicker) { max-width: 480px; margin: 18px 0 22px; color: #c4c3b8; font-size: .93rem; line-height: 1.7; }
+    .game-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .game-tags span { padding: 8px 10px; border: 1px solid var(--line); color: var(--blue); font-size: .64rem; font-weight: 900; letter-spacing: .09em; text-transform: uppercase; }
+    .gaming-art { min-height: 245px; display: grid; place-items: center; position: relative; border: 1px solid rgba(196, 222, 86, .45); background: #141512; }
+    .gaming-art svg { width: min(82%, 330px); height: auto; }
+    .gaming-art-label { position: absolute; right: 12px; bottom: 11px; color: var(--red); font-size: .62rem; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+
+    .closing {
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 32px;
+      padding: clamp(28px, 5vw, 54px);
+      border: 1.5px solid var(--ink);
+      background: var(--blue);
+      color: var(--paper);
+    }
+    .closing::after {
+      position: absolute;
+      top: 13px;
+      right: 13px;
+      bottom: 13px;
+      left: 13px;
+      border: 1px solid rgba(20, 21, 18, .38);
+      content: "";
+      pointer-events: none;
+    }
+    .closing-copy, .closing-action { position: relative; z-index: 1; }
+    .closing-copy p { margin: 0 0 10px; color: #343a23; font-size: .68rem; font-weight: 900; letter-spacing: .15em; text-transform: uppercase; }
+    .closing h2 { max-width: 570px; font-size: clamp(2.3rem, 4.6vw, 4.15rem); line-height: .99; }
+    .closing-action { flex: 0 0 auto; }
+    .closing .primary-button { border-color: var(--paper); background: var(--paper); color: var(--ink); }
+    .closing .primary-button:hover { border-color: var(--red); background: var(--red); color: var(--paper); }
+    .closing .fine-print { color: #343a23; }
+    footer { display: flex; justify-content: space-between; gap: 20px; padding: 25px 0 31px; color: var(--muted); font-size: .7rem; }
+    footer p { margin: 0; }
+
+    dialog {
+      width: min(440px, calc(100% - 32px));
+      padding: 0;
+      border: 1.5px solid var(--ink);
+      background: var(--paper);
+      color: var(--ink);
+      box-shadow: 9px 9px 0 var(--red);
+    }
+    dialog::backdrop { background: rgba(29, 31, 28, .58); backdrop-filter: blur(3px); }
+    .dialog-inner { padding: 30px; }
+    .dialog-top { display: flex; justify-content: space-between; align-items: start; gap: 20px; }
+    .dialog-kicker { margin: 0 0 10px; color: var(--red); font-size: .67rem; font-weight: 900; letter-spacing: .14em; text-transform: uppercase; }
+    dialog h2 { max-width: 310px; font-size: 2.4rem; line-height: .98; }
+    .close-button { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid var(--ink); border-radius: 50%; background: transparent; cursor: pointer; font-size: 1.2rem; }
+    .application-form { display: grid; gap: 15px; margin-top: 26px; }
+    .application-form label { display: grid; gap: 7px; font-size: .75rem; font-weight: 800; }
+    .application-form input { width: 100%; min-height: 46px; padding: 0 12px; border: 1px solid var(--line); border-radius: 0; background: #20211c; color: var(--ink); }
+    .application-form .primary-button { width: 100%; margin-top: 4px; }
+    .confirmation { min-height: 1.3em; margin: 17px 0 0; color: var(--blue); font-size: .85rem; font-weight: 800; line-height: 1.5; }
+
+    @media (max-width: 780px) {
+      .site-shell { width: min(100% - 36px, 570px); }
+      .edition { max-width: 130px; text-align: right; line-height: 1.5; }
+      .hero { grid-template-columns: 1fr; gap: 48px; padding: 55px 0 61px; }
+      h1 { max-width: 550px; font-size: clamp(3.8rem, 13vw, 6rem); }
+      .poster { width: calc(100% - 12px); min-height: 390px; margin: 0 auto; }
+      .poster-art { width: min(92%, 410px); }
+      .seal { right: -14px; width: 88px; height: 88px; font-size: .58rem; }
+      .details { padding: 66px 0 72px; }
+      .details-grid, .jokes-grid { grid-template-columns: 1fr; }
+      .gaming { grid-template-columns: 1fr; gap: 26px; margin-bottom: 66px; }
+      .detail-card { min-height: 0; }
+      .card-number { margin-bottom: 19px; }
+      .section-heading { align-items: start; flex-direction: column; }
+      .section-note { max-width: 380px; }
+      .closing { align-items: start; flex-direction: column; gap: 25px; }
+    }
+    @media (max-width: 420px) {
+      .site-shell { width: calc(100% - 30px); }
+      .masthead { min-height: 66px; font-size: .62rem; }
+      .brand { gap: 8px; }
+      .brand-mark { width: 28px; height: 28px; }
+      .hero { padding-top: 46px; }
+      h1 { font-size: 3.62rem; }
+      .intro { font-size: .98rem; }
+      .job-facts { grid-template-columns: 1fr; }
+      .poster { min-height: 325px; }
+      .poster-caption { right: 18px; bottom: 17px; font-size: .82rem; }
+      .seal { top: -18px; }
+      footer { flex-direction: column; gap: 8px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-shell masthead">
+    <a class="brand" href="#top" aria-label="After Hours home">
+      <span class="brand-mark" aria-hidden="true">AH</span>
+      <span>After Hours / Joke Dept.</span>
+    </a>
+    <span class="edition">Comedy division / Hiring now</span>
+  </header>
+
+  <main id="top">
+    <section class="site-shell hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">Now hiring / After Hours division</p>
+        <h1 id="hero-title">Now hiring: Player Two. <em>Great comic timing preferred.</em></h1>
+        <p class="intro">After Hours is seeking one reliable guy for co-op missions, late-night laughs, and occasional emergency revives. <strong>Must remain calm when Player One says, "I know what I'm doing." (He does not.)</strong></p>
+        <button class="primary-button open-application" type="button">Submit your application <span class="button-arrow" aria-hidden="true">&rarr;</span></button>
+        <p class="fine-print">No resume needed. Your last three respawns count as references.</p>
+        <dl class="job-facts" aria-label="Position summary">
+          <div><dt>Position</dt><dd>Player Two</dd></div>
+          <div><dt>Schedule</dt><dd>Evenings &amp; weekends</dd></div>
+          <div><dt>Location</dt><dd>Online / side quests</dd></div>
+        </dl>
+      </div>
+
+      <div class="poster" aria-label="Illustration of an arcade cabinet advertising the Player Two position">
+        <span class="seal">Now hiring<br>benefits fictional</span>
+        <svg class="poster-art" viewBox="0 0 500 430" role="img" aria-labelledby="art-title art-desc">
+          <title id="art-title">Player Two arcade cabinet</title>
+          <desc id="art-desc">An arcade cabinet displays a tiny pixel hero, joystick, and action buttons.</desc>
+          <path d="M92 362c-28-42-30-132-2-194C124 92 184 58 259 65c75 7 130 49 148 113 16 58 6 138-24 184H92Z" fill="#20251d" stroke="#c4de56" stroke-width="3"/>
+          <path d="M151 76h198l24 245-30 37H157l-30-37Z" fill="#ff6947" stroke="#141512" stroke-width="6" stroke-linejoin="round"/>
+          <path d="M164 91h172v36H164Z" fill="#141512" stroke="#e9e5d8" stroke-width="3"/>
+          <text x="250" y="116" fill="#c4de56" font-family="Arial, sans-serif" font-size="17" font-weight="900" letter-spacing="2" text-anchor="middle">PLAYER TWO</text>
+          <path d="M163 142h174v132H163Z" fill="#141512" stroke="#141512" stroke-width="5"/>
+          <path d="M174 153h152v109H174Z" fill="#c4de56"/>
+          <path d="M174 226h152v36H174Z" fill="#4764d8"/>
+          <path d="M174 242h152v20H174Z" fill="#20251d"/>
+          <path d="M190 207h21v19h-21Zm95-20h21v39h-21Zm-76 20h17v19h-17Zm78-39h17v19h-17Z" fill="#e8b94e"/>
+          <path d="M232 190h29v36h-29Z" fill="#ff6947"/>
+          <path d="M236 177h21v17h-21Zm-8 49h12v17h-12Zm24 0h12v17h-12Z" fill="#141512"/>
+          <path d="M154 292h192" stroke="#141512" stroke-width="5"/>
+          <path d="M191 299v29m-14-14h29" stroke="#e9e5d8" stroke-width="8" stroke-linecap="square"/>
+          <circle cx="278" cy="306" r="8" fill="#c4de56"/><circle cx="302" cy="321" r="8" fill="#e8b94e"/><circle cx="302" cy="292" r="8" fill="#4764d8"/>
+          <path d="M191 356h118m-101 0v19m84-19v19" stroke="#141512" stroke-width="6" stroke-linecap="round"/>
+          <path d="m91 111 6 14 15 2-12 9 3 15-12-8-13 7 4-15-11-10 15-1Zm318 54 5 11 12 1-9 8 3 12-11-7-10 6 3-12-9-8 12-1Z" fill="#e8b94e" stroke="#141512" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M82 305c-10 7-16 15-17 25m332-182c11 4 18 10 22 20" fill="none" stroke="#c4de56" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+        <span class="poster-caption">Department head / 4,000 hours in tutorial</span>
+      </div>
+    </section>
+
+    <div class="ticker" aria-label="Position details">
+      <div class="ticker-track" aria-hidden="true">
+        <span>Now hiring: player two</span><span>Compensation: XP + banter</span><span>No cash. All respawns.</span><span>Now hiring: player two</span><span>Compensation: XP + banter</span><span>No cash. All respawns.</span>
+      </div>
+    </div>
+
+    <section class="site-shell jokes" aria-labelledby="jokes-title">
+      <div class="section-heading">
+        <div>
+          <p>Skills assessment / sample work</p>
+          <h2 id="jokes-title">A few jokes from the lobby</h2>
+        </div>
+        <p class="section-note">Laughter isn't guaranteed. A pity laugh still counts toward team morale.</p>
+      </div>
+      <div class="jokes-grid">
+        <article class="joke-card">
+          <span class="joke-label">Teamwork</span>
+          <blockquote>Co-op is when you both say, "I know where I'm going," then <span>follow each other in a circle.</span></blockquote>
+        </article>
+        <article class="joke-card">
+          <span class="joke-label">Good sportsmanship</span>
+          <blockquote>I don't rage-quit. I give the game <span>a brief opportunity to miss me.</span></blockquote>
+        </article>
+        <article class="joke-card">
+          <span class="joke-label">Squad strategy</span>
+          <blockquote>One player reads the tutorial, one skips it, and then both ask <span>what the buttons do.</span></blockquote>
+        </article>
+      </div>
+    </section>
+
+    <section class="site-shell gaming" aria-labelledby="gaming-title">
+      <div class="gaming-copy">
+        <p class="gaming-kicker">Team culture / required co-op</p>
+        <h2 id="gaming-title">Your team-building is the game.</h2>
+        <p>Down for co-op, story games, and open-world side quests that start with "I'll just check the map" and end three hours later beside a suspiciously large explosion. I don't rage-quit; I give the game some time to think about what it's done.</p>
+        <div class="game-tags" aria-label="Gaming interests">
+          <span>Co-op</span><span>Story mode</span><span>Party games</span><span>Friendly rivalry</span>
+        </div>
+      </div>
+      <div class="gaming-art">
+        <svg viewBox="0 0 360 220" role="img" aria-labelledby="controller-title controller-desc">
+          <title id="controller-title">Player two controller</title>
+          <desc id="controller-desc">A bright game controller with a directional pad and four action buttons.</desc>
+          <path d="M99 48c-23 0-39 15-47 39l-25 72c-8 23 17 39 34 24l48-39h142l48 39c17 15 42-1 34-24l-25-72c-8-24-24-39-47-39H99Z" fill="#20251d" stroke="#c4de56" stroke-width="5" stroke-linejoin="round"/>
+          <path d="M88 82v54m-27-27h54" stroke="#f0eee4" stroke-width="11" stroke-linecap="square"/>
+          <circle cx="261" cy="88" r="12" fill="#ff6947"/><circle cx="290" cy="111" r="12" fill="#e8b94e"/>
+          <circle cx="232" cy="111" r="12" fill="#c4de56"/><circle cx="261" cy="134" r="12" fill="#f0eee4"/>
+          <ellipse cx="154" cy="111" rx="14" ry="20" fill="#141512" stroke="#f0eee4" stroke-width="4"/>
+          <ellipse cx="195" cy="111" rx="14" ry="20" fill="#141512" stroke="#f0eee4" stroke-width="4"/>
+          <path d="M148 168h64" stroke="#ff6947" stroke-width="5" stroke-linecap="round"/>
+        </svg>
+        <span class="gaming-art-label">Co-op first. Blame lag second.</span>
+      </div>
+    </section>
+
+    <section class="site-shell details" aria-labelledby="details-title">
+      <div class="section-heading">
+        <div>
+          <p>Position description / read before applying</p>
+          <h2 id="details-title">The job description</h2>
+        </div>
+        <p class="section-note">HR is me, an open tab, and a printer that only works when threatened.</p>
+      </div>
+      <div class="details-grid">
+        <article class="detail-card">
+          <span class="card-number">01 / Key responsibilities</span>
+          <h3>Co-op operations</h3>
+          <p>Join missions, provide backup, and revive the lead applicant after he mistakes the boss arena for a sightseeing tour.</p>
+        </article>
+        <article class="detail-card">
+          <span class="card-number">02 / Qualifications</span>
+          <h3>Quick wit &amp; dependable</h3>
+          <p>Bring quick wit, a functioning controller, and the ability to read a room. Knowing which button is "jump" is preferred.</p>
+        </article>
+        <article class="detail-card">
+          <span class="card-number">03 / Compensation &amp; benefits</span>
+          <h3>Paid in XP</h3>
+          <p>Earn shared XP, achievements, and premium banter. Cash salary: $0. Raises considered after our first successful boss fight.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="site-shell closing" aria-labelledby="closing-title">
+      <div class="closing-copy">
+        <p>Applications reviewed on a rolling respawn basis</p>
+        <h2 id="closing-title">Your next career move is one lobby invite away.</h2>
+      </div>
+      <div class="closing-action">
+        <button class="primary-button open-application" type="button">Apply for the position <span class="button-arrow" aria-hidden="true">&rarr;</span></button>
+        <p class="fine-print">Cover letter optional. Mic check mandatory.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-shell">
+    <p>© 2026 After Hours / Joke Dept.</p>
+    <p>Equal opportunity respawns. Salary is fictional; the friendship is not.</p>
+  </footer>
+
+  <dialog id="application-dialog" aria-labelledby="dialog-title">
+    <div class="dialog-inner">
+      <div class="dialog-top">
+        <div>
+          <p class="dialog-kicker">Player Two / application form</p>
+          <h2 id="dialog-title">Tell HR why you're qualified.</h2>
+        </div>
+        <button class="close-button" type="button" aria-label="Close application">&times;</button>
+      </div>
+      <form class="application-form" id="application-form">
+        <label for="applicant-name">Applicant name / preferred gamer tag
+          <input id="applicant-name" name="name" autocomplete="name" placeholder="Your name or gamer tag" required>
+        </label>
+        <label for="applicant-joke">Relevant experience / funniest co-op story
+          <input id="applicant-joke" name="joke" placeholder="Tell us about your finest gaming fail" required>
+        </label>
+        <button class="primary-button" type="submit">Send to fictional HR <span class="button-arrow" aria-hidden="true">&rarr;</span></button>
+      </form>
+      <p class="confirmation" id="confirmation" role="status" aria-live="polite"></p>
+    </div>
+  </dialog>
+
+  <script>
+    const applicationDialog = document.querySelector("#application-dialog");
+    const applicationForm = document.querySelector("#application-form");
+    const confirmation = document.querySelector("#confirmation");
+
+    document.querySelectorAll(".open-application").forEach((button) => {
+      button.addEventListener("click", () => {
+        confirmation.textContent = "";
+        applicationDialog.showModal();
+        document.querySelector("#applicant-name").focus();
+      });
+    });
+
+    document.querySelector(".close-button").addEventListener("click", () => applicationDialog.close());
+
+    applicationForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const formData = new FormData(applicationForm);
+      const name = formData.get("name").trim();
+      const joke = formData.get("joke").trim();
+      confirmation.textContent = `HR received your application, ${name}. The panel reviewed "${joke}" and gave it 6.5 out of 10, mostly because the lead reviewer is still in the tutorial.`;
+      applicationForm.reset();
+    });
+  </script>
+</body>
+</html>
